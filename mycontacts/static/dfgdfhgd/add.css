@@ -17,6 +17,9 @@ textarea {
 	transition: .333s ease top, .333s ease opacity;
 }
 
+
+
+
 .form-control {
 	border-radius: 0;
 	border-color: #ccc;
