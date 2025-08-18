@@ -1,3 +1,5 @@
+
+
 {% extends 'mycontacts/background.html' %}
 {% load static %}
 {% block content %}
@@ -8,23 +10,22 @@
           <form id="-coaddntact-form" class="form" action="#" method="POST" role="form">
             
               {% csrf_token %}
-              {{ form.as_p }}
               
               <div class="form-group">
                   <label class="form-label">Name</label>
-                  <input type="text" class="form-control" id="name" name="name" placeholder="Name" tabindex="1" required>
+                  <input type="text" class="form-control" id="name" name="name" placeholder="Name" tabindex="1" value="{{contact.name}}" required >
               </div>
               <div class="form-group">
                   <label class="form-label">Relation</label>
-                  <input type="text" class="form-control" id="relation" name="relation" placeholder="Relation" tabindex="2" required>
+                  <input type="text" class="form-control" id="relation" name="relation" placeholder="Relation" tabindex="2" value="{{contact.relation}}" required>
               </div>
               <div class="form-group">
                   <label class="form-label">Phone</label>
-                  <input type="text" class="form-control" id="phone" name="phone" placeholder="Phone" tabindex="3" required>
+                  <input type="text" class="form-control" id="phone" name="phone" placeholder="Phone" tabindex="3" value="{{contact.phone}}" required>
               </div>
               <div class="form-group">
                   <label class="form-label" for="email">Email</label>
-                  <input type="text" class="form-control" id="email" name="email" placeholder="Email" tabindex="4" required>
+                  <input type="text" class="form-control" id="email" name="email" placeholder="Email" tabindex="4" value="{{contact.email}}" required>
               </div>                            
               
               <div class="text-center">

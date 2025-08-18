@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, redirect
 from .forms import AddForm
 from .models import Contact
 from django.http import HttpResponseRedirect
@@ -40,5 +40,32 @@ def add(request):
             return render(request, 'mycontacts/add.html')
     else:
         return render(request, 'mycontacts/add.html')
+
+def delete(request,contact_id):
+    if contact_id in Contact.objects.values_list('id', flat=True):
+        Contact.objects.filter(id=contact_id).delete()
+        return render(request, 'mycontacts/show.html', {'contacts': Contact.objects.all()})
+    
+def editar(request, contact_id):
+    contact = get_object_or_404(Contact, id=contact_id) # tenta buscar o usuário pelo ID (id=contact_id), se não encontrar esse usuário, retorna na tela o erro 404.
+
+    if request.method == 'POST':
+
+        # popula o form com POST + instância existente
+        contact.name = request.POST.get('name')
+        contact.relation = request.POST.get('relation')
+        contact.phone = request.POST.get('phone')
+        contact.email = request.POST.get('email')
+        contact.save()
+
+        # após salvar, redireciona ou renderiza a lista
+        contact_list = Contact.objects.all()
+
+        return redirect("home")
+
+    else:
+        # se for GET, renderiza o template de edição passando o contact
+        return render(request, 'mycontacts/editar.html', {'contact': contact})
+
 
     
