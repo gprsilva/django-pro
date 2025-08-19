@@ -44,7 +44,7 @@ def add(request):
 def delete(request,contact_id):
     if contact_id in Contact.objects.values_list('id', flat=True):
         Contact.objects.filter(id=contact_id).delete()
-        return render(request, 'mycontacts/show.html', {'contacts': Contact.objects.all()})
+        return redirect("home")
     
 def editar(request, contact_id):
     contact = get_object_or_404(Contact, id=contact_id) # tenta buscar o usuário pelo ID (id=contact_id), se não encontrar esse usuário, retorna na tela o erro 404.
